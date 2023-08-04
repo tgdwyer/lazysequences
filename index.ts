@@ -123,14 +123,14 @@ function lengthOfSequence<T>(lazyList: LazySequence<T>): number {
  */
 
 // This is a solution by map, take and reduce.
-function exercise4Solution(seriesLength: number): number {
+function piApproximation(seriesLength: number): number {
   function nextSeq(n: number) {
     return -1 * (n > 0 ? n + 2 : n - 2);
   }
   const seq1 = initSequence(nextSeq)(1);
   const seq2 = map((x) => 1 / x, seq1);
   const finiteSeq = take(seriesLength, seq2);
-  return reduce((a, b) => a + b, finiteSeq, 0);
+  return 4*reduce((a, b) => a + b, finiteSeq, 0);
 
   // here is the same thing, but without any intermediate variables:
   // return reduce((a,b)=>a+b,
@@ -146,4 +146,4 @@ showTen(naturals)
 showTen(map(x=>x+10,naturals))
 showTen(filter(x=>Boolean(x%2),naturals)) // odds only
 const last = s => reduce((_,e)=>e,s,null)
-console.log(last,4*exercise4Solution(100))
+console.log(piApproximation(100))
